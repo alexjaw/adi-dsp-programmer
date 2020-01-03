@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="adi_dsp_programmer download" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="download" PASS_PARENT_ENVS_2="true" PROJECT_NAME="adi_dsp_programmer" TARGET_NAME="adi_dsp_programmer" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="adi_dsp_programmer" RUN_TARGET_NAME="adi_dsp_programmer">
+    <method v="2">
+      <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+    </method>
+  </configuration>
+</component>
