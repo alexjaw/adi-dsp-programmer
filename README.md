@@ -1,5 +1,5 @@
 # adi-dsp-programmer
-Can be used to program adi dsp:s such as adau1467 over i2c.
+Can be used to program adi dsp:s such as adau1467 over i2c. Has been tested with Raspberry3b and /dev/i2c-1.
 
 Use System Files (Action) in SigmaStudio to generate the files that define the dsp configuration (can be more than 1).
 Create a directory system_files and copy the system files to the directory.
