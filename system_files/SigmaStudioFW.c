@@ -4,7 +4,7 @@
 
 #include "SigmaStudioFW.h"
 #include <unistd.h>
-#include "i2c.h"
+#include "../i2c.h"
 #include <stdio.h>
 
 void SIGMA_READ_REGISTER( int devAddress, int address, int length, ADI_REG_TYPE *pData ){
