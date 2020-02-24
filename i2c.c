@@ -11,10 +11,12 @@
 #include <sys/ioctl.h>
 #include <linux/i2c.h>
 #include <linux/i2c-dev.h>
+#include <errno.h>
 #include "i2c.h"
 
 #define I2C_BUS "/dev/i2c-1"
 #define REG_SIZE 2     //number of bytes for a dsp register address
+// todo: how set baudrate? max 400kHz
 
 // I2C Linux device handle
 static int g_i2cFile;
@@ -176,6 +178,10 @@ int write_i2c_block_data(
     unsigned short outbuf_size = REG_SIZE + val_length;  //reg is 2 bytes
     unsigned char* outbuf;
     outbuf = (unsigned char*) calloc(outbuf_size, sizeof(unsigned char));  //todo: Should outbuf have a fixed size?
+    if (outbuf == NULL){
+        fprintf(stderr, "ERROR, calloc returned NULL-pointer\n");
+        isError = 1;
+    }
 
     // Set the reg address
     outbuf[0] = (unsigned char)((reg >> 8) & 0xFF);
@@ -198,6 +204,7 @@ int write_i2c_block_data(
     if (!isError){
         if (write_i2c_block_data_raw(addr, outbuf, outbuf_size)) {
             fprintf(stderr, "Unable to send data over i2c for device: 0x%02x\n", addr);
+            fprintf(stderr, "reg: 0x%04x, val_length: %d\n", reg, val_length);
             isError = 1;
         }
     }
@@ -215,7 +222,16 @@ int write_i2c_block_data(
 // The onlu porpose of this function is to separate the actual call of OS
 // ioctl()
 static int send_data(struct i2c_rdwr_ioctl_data* packets) {
+    /* messages[0].addr  = addr;
+     * messages[0].flags = 0;
+     * messages[0].len   = outbuf_size;
+     * messages[0].buf   = outbuf;
+     * packets.msgs  = messages;
+     * packets.nmsgs = 1;
+     * */
     if(ioctl(g_i2cFile, I2C_RDWR, packets) < 0) {
+        fprintf(stderr, "ERROR, ioctl returned errno %s\n", strerror(errno));
+        fprintf(stderr, "len: %d\n", packets->msgs->len);
         return 1;
     }
     return 0;
