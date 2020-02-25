@@ -18,7 +18,7 @@ void SIGMA_WRITE_REGISTER_BLOCK( int devAddress8, int address, int length, ADI_R
 
 void SIGMA_WRITE_DELAY( int devAddress, int length, ADI_REG_TYPE *pData ){
     if(pData[1] == 0xFF){
-        usleep(10000);
+        usleep(11000);
     }else if(pData[1] == 0x01){
         usleep(1);
     }else{
