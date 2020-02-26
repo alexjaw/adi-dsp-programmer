@@ -132,9 +132,9 @@ int main(int argc, char *argv[]) {
 #define ALPHA_REG_BYTES 8
             int err = 0;
             float vol = 0.0, g = 0.0;
-            unsigned short gain_reg = 0x006d;
+            unsigned short gain_reg = 1242;
             printf("using fixed gain adj reg: 0x%04x\n", gain_reg);
-            unsigned short alpha_reg = 0x006e;
+            unsigned short alpha_reg = 1243;
             unsigned char alpha_reg_data[ALPHA_REG_BYTES] = {0x00, 0xff, 0xfb, 0xd5, 0x00, 0x00, 0x04, 0x2b};
             sscanf(argv[ARG_VOL], "%f", &vol);
             if(vol < 0 || vol > 100){
